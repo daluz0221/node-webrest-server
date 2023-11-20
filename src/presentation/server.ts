@@ -3,7 +3,7 @@ import path from 'path';
 
 interface Options {
     port: number;
-    public_path: string;
+    public_path?: string;
 }
 
 export class Server {
@@ -13,7 +13,7 @@ export class Server {
     private readonly publicPath: string;
 
     constructor(private options: Options) {
-        const { port, public_path } = options;
+        const { port, public_path = 'public' } = options;
         this.port = port;
         this.publicPath = public_path;
     }
@@ -29,14 +29,13 @@ export class Server {
 
         //* Routes
         this.app.get('*', (req, res) => {
-            const indexPath = path.join(__dirname, `../../${ this.publicPath }/index.html`);
+            const indexPath = path.join(__dirname, `../../../${ this.publicPath }/index.html`);
             res.sendFile(indexPath);
-            return;
             
         })
         
         this.app.listen(this.port, ()=>{
-            console.log('Server is running on port 8080');   
+            console.log(`Server is running on port ${ this.port }`);   
         });
         
     }
