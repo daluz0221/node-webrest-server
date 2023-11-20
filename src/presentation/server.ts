@@ -35,7 +35,7 @@ export class Server {
             
         })
         
-        this.app.listen(8080, ()=>{
+        this.app.listen(this.port, ()=>{
             console.log('Server is running on port 8080');   
         });
         
